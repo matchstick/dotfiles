@@ -1,0 +1,25 @@
+[user]
+	name = Michael Rubin
+	email = mhr@neverthere.org
+[credential]
+	helper = cache --timeout=315360000
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	revert = checkout --
+	amend = commit --amend -a
+	curbr = rev-parse --abbrev-ref HEAD
+	root = rev-parse --show-toplevel
+	fup = fetch upstream
+	rb = rebase
+	rbup = rebase upstream/master
+	po = push origin
+	pocur = !git po $(git curbr)
+	pofcur = !git po -f $(git curbr)
+	wdiff = diff --color-words
+	track = "!f() { git co -b $1 origin/$1; }; f"
+	copr = "!f() { git fetch upstream pull/$1/head:pr-$1; git co pr-$1;}; f"
+[merge]
+	conflictstyle = diff3

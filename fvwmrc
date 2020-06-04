@@ -1,0 +1,279 @@
+#
+# FVWM2 common config
+#
+# Swiped from jph, who swiped from jal
+#
+
+#	Setup options
+#
+# ------------------------
+
+DeskTopSize	4x1
+EdgeResistance	800 10
+EdgeScroll	100 100
+OpaqueMoveSize  -1
+
+
+############
+# FvwmTaskBar
+###########
+Style "FvwmTaskBar" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
+
+
+DestroyModuleConfig FvwmTaskBar: *
+*FvwmTaskBar: Geometry +0-0
+*FvwmTaskBar: Rows 3
+*FvwmTaskBar: Font "xft:Sans:Bold:pixelsize=12:minispace=True:antialias=True"
+*FvwmTaskBar: SelFont "xft:Sans:Bold:pixelsize=12:minispace=True:antialias=True"
+*FvwmTaskBar: StatusFont "xft:Sans:Bold:pixelsize=12:minispace=True:antialias=True"
+*FvwmTaskBar: Colorset 9
+*FvwmTaskBar: IconColorset 9
+*FvwmTaskBar: FocusColorset 9
+*FvwmTaskBar: TipsColorset 9
+*FvwmTaskBar: UseSkipList
+*FvwmTaskBar: UseIconNames
+*FvwmTaskBar: ShowTips
+*FvwmTaskBar: StartName FVWM
+*FvwmTaskBar: StartMenu FvwmRootMenu
+*FvwmTaskBar: Button Title ATerm, Icon mini/xterm.png, Action (Mouse 1) FvwmATerm
+*FvwmTaskBar: Action Click3 Menu FvwmWindowOpsMenu
+*FvwmTaskBar: StartIcon mini/fvwm.png
+#Module FvwmTaskBar
+
+##########
+# Buttons
+###########
+Style "LaunchTime" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, StaysOnBottom, !Iconifiable
+
+*FvwmButtonsBoxSize dumb
+
+DestroyModuleConfig LaunchTime: *                                    
+*LaunchTime: Rows 1
+*LaunchTime: Font "xft:Bitstream Vera Sans Mono:style=Roman:size=8" 
+*LaunchTime: Colorset 30 
+*LaunchTime: Frame 1 
+*LaunchTime: (1x1, Icon /usr/share/icons/hicolor/64x64/apps/google-chrome.png, Action(Mouse 1) `Exec google-chrome`) 
+#*LaunchTime: (1x1, Title Suspend, Action(Mouse 1) `Exec sudo pm-suspend`) 
+
+
+#Module FvwmButtons -g 140x89+2212+0 LaunchTime
+Module FvwmButtons LaunchTime
+
+##########
+# Fix for a bug in Chrome
+###########
+
+DestroyFunc DeiconifyChromeBug
+AddToFunc DeiconifyChromeBug
++ I Stick
++ I RefreshWindow
++ I Move w+0p w+0p
++ I RefreshWindow
++ I Stick
+
+DestroyFunc Switch-Iconic
+AddToFunc Switch-Iconic
++ I Iconify
++ I All (CurrentPage,!Iconic,!Sticky,"* Google Chrome") DeiconifyChromeBug
+
+
+#	Style options
+#
+# ------------------------
+
+Style	"*"	ForeColor rgb:e0/e0/e0, BackColor rgb:60/60/60, BorderWidth 3, \
+		StickyIcon, SmartPlacement, RandomPlacement, IconBox 0 0 572 82
+MenuStyle	White rgb:40/40/40 grey40 fvwm
+#MenuStyle	White rgb:40/40/40 grey40 lucidasanstypewriter-12 fvwm
+HilightColor	white rgb:40/40/40
+DefaultFont "xft:Sans:Bold:pixelsize=12:minispace=True:antialias=True"
+
+Style	"dclock"	Sticky,NoTitle,WindowListSkip,NoHandles
+Style	"FvwmPager"	Sticky,NoTitle,WindowListSkip,NoHandles
+Style	"xload"		Sticky,NoTitle,WindowListSkip,NoHandles
+Style	"Fvwm*"		Sticky,NoTitle,WindowListSkip
+
+
+#	Functions
+#
+# ------------------------
+
+AddToFunc "InitFunction"
++	"I"	Module FvwmPager 0 0
++	"I"	Module FvwmBacker
++ 	"I"	Module FvwmIconBox 0 0 572 82
++       "I"     Exec nice dclock -fade -dateup -date "%a %b %d %Y" -geometry =167x82+1326+0 -miltime
++	"I"	Exec nice xload -label "Monkey" -update 2 -geometry =164x82+1678+1
++ 	"I"	Exec xterm -bdc -T "Don't Code Drunk (especially in Assembly)" -geometry =80x23+6+96 
++	"I"	Exec xterm -bdc -T "Design First" -geometry =80x56+1-5 
+			
+
+AddToFunc "RestartFunction"
++	"I"	Module FvwmPager 0 0
++	"I"	Module FvwmBacker
++ 	"I"	Module FvwmIconBox 0 0 572 82
+
+AddToFunc "Move-And-Raise"
++       "M"     Move
++       "M"     Raise
++       "C"     Raise
+
+#	Menus
+#
+# -----------------
+
+AddToMenu Tools "Tools" Title
++ 	"Chrome"		Exec    google-chrome
++ 	"gimp"			Exec    gimp
++	"shell"			Exec	xterm
+
+
+
+
+AddToMenu Special "Special" Title
++	"Refresh Screen"	Refresh
++	"Reload Resources"	Exec xrdb -load ~/.Xdefaults
++	"Restart Fvwm"		Restart fvwm2
++	"xlock"			Exec xlock
++	"Lights"		Exec xsetroot -solid black
++	""			Nop
++	""			Nop
++	""			Nop
++ 	"Restart"		Exec shutdown -r now
++ 	"Halt"			Exec shutdown -h now
++	""			Nop
++	""			Nop
++	""			Nop
++	"Logout"		Quit
+
+AddToMenu WindowOps "Window Ops" Title
++	"Close"		Delete
++	"Kill"		Destroy
++	"Raise"		Raise
++	"Lower"		Lower
++	"Move"		Move
++	"Resize"	Resize
++	"Iconify"	Switch-Iconic
++	"Identify"	Module FvwmIdent
++	"Stick"		Stick
++	"Windows"	WindowList
+	
+############################################################
+# Mouse Bindings
+############################################################
+# Button: 
+# 0 - any button
+# 1 - left
+# 2 - middle
+# 3 - right
+############################################################
+# Context:
+# R - Root window
+# W - APplication Window
+# T - Title Bar
+# S - Window Side, top, or bottom, bar
+# F - Window frame (the corners)
+# I - Icon window
+# 0-9 title bar buttons
+############################################################
+# Modifiers:
+# N - none
+# C - Control Key
+# S - Shift Key
+# M - Meta Key
+# A - Any modifier
+############################################################
+#     Button	Context Modifi	Function
+
+# Our root menus
+Mouse 1 	R 	A 	Menu Tools Nop
+Mouse 2 	R 	A 	Menu WindowOps Nop
+Mouse 3 	R 	A 	Menu Special Nop
+
+# Window Bindings
+Mouse 0         F       A       Resize
+Mouse 0         S       A       Resize
+
+# Title bar
+Mouse 1		T	A	Function "Move-And-Raise"
+Mouse 2		T	A	Move
+Mouse 3		T	A	Lower
+
+# Just like the title bar but with the Meta-key
+Mouse 1		W	M	Function "Move-And-Raise"
+Mouse 2		W	M	Move
+Mouse 3		W	M	Lower
+
+# Window button on the left
+Mouse 0 	1 	A 	Menu WindowOps Nop
+
+# Window's "Iconify" Button
+Mouse 0         4       N       Switch-Iconic
+
+# Window's Multi-featured resize button.
+Mouse 1		2	N	Maximize 99 80
+Mouse 2		2	N	Maximize 0 98
+Mouse 3		2	N	Maximize 99 0
+
+# What happens when we click on an iconified box.
+Mouse 1		I	N	Switch-Iconic
+Mouse 2		I	N	Switch-Iconic
+Mouse 3		I	N	Switch-Iconic
+
+
+#	Key Bindings
+# ----------------------
+# /usr/include/X11/keysymdef.h
+
+# ---- QWERTY ----
+
+# Keybinding for apps
+Key   s		A	M	Exec xterm -bdc -T "LittleBuddah" -geom 82x32 &
+Key   f		A	M	Exec xterm -bdc -T "LittleBuddah" -geom 82x32 -bg darkblue -fg white &
+Key   b		A	M	Exec xsetroot -solid black 
+Key   t         A       M       Exec xterm  -geom 82x40 -fg white -bg darkred \
+					-T tanuki -e ssh -p 48558 mhr@www.neverthere.org
+Key   t         A       M       Exec xterm  -geom 82x40 -fg white -bg darkred \
+					-T tanuki -e ssh -p 48558 mhr@www.neverthere.org
+Key   c 	A	M	Exec xterm -T mhr-pc -fg black -bg grey
+Key   z 	A	M	Switch-Iconic
+
+# Cursor Movement
+Key 	k	A	M	CursorMove 0 -10
+Key 	k	A	MS	CursorMove 0 -3
+Key 	j	A	M	CursorMove 0  10
+Key 	j	A	MS	CursorMove 0  3
+Key 	h	A	M	CursorMove -10 0
+Key 	h	A	MS	CursorMove -3 0
+Key 	l	A	M	CursorMove 10  0
+Key 	l	A	MS	CursorMove 3  0
+
+# Virtual Page Mappings
+Key     Left    A       C       GotoPage -1p 0p
+Key     Right   A       C       GotoPage +1p 0p
+Key     Up      A       C       GotoPage 0p  -1p
+Key     Down    A       C       GotoPage 0p  +1p
+Key	Space	A	M       Exec bin/lockmute.sh
+Key	N	A	M       Exec google-chrome
+
+# Music Keys
+Key	XF86AudioLowerVolume A A Exec amixer set 'Master' 5%-
+Key	XF86AudioRaiseVolume A A Exec amixer set 'Master' 5%+
+
+#
+#	Modules
+#
+
+# ------------------------ Pager
+*FvwmPagerBalloons	true
+*FvwmPagerGeometry	160x84-39+0
+*FvwmPagerBack		grey60
+*FvwmPagerFore		black
+*FvwmPagerFont		-adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
+*FvwmPagerHilight	#c0c0c0
+*FvwmPagerFont		none
+*FvwmPagerSmallFont	5x8
+*FvwmPagerDeskColor	0 grey60
+*FvwmBackerDesk 0 -solid black
