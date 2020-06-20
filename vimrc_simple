@@ -1,0 +1,12 @@
+set nocompatible
+syntax on
+set nu
+set ruler
+
+set list
+set listchars=tab:>-,trail:_
+set tabstop=4
+set shiftwidth=4
+set ai
+syn on
+set textwidth=80
