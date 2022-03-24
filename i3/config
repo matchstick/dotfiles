@@ -10,6 +10,8 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $conf_dir ~/.config/i3
+set $i3sys ~/.config/i3/i3system.sh
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -170,7 +172,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 	position top
-        status_command i3status --config ~/.config/i3/i3status.conf
+        status_command i3status --config $conf_dir/i3status.conf
 	font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 	font pango:DejaVu Sans Mono 30
 	workspace_buttons yes
@@ -197,8 +199,27 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
+
+
+set $mode_system System (l) lock, (x) exit, (r) reboot, (s) shutdown
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $i3sys lock, mode "default"
+    bindsym x exec --no-startup-id $i3sys exit, mode "default"
+    bindsym r exec --no-startup-id $i3sys reboot, mode "default"
+    bindsym s exec --no-startup-id $i3sys shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+semicolon mode "$mode_system"
+
+
 # Startup the applications when logging in.
+exec variety
 exec i3-msg 'workspace $ws2; exec i3-sensible-terminal'
 exec i3-msg 'workspace $ws2; exec google-chrome --profile-directory=Default'
-exec i3-msg 'workspace $ws4; exec signal-desktop'
-exec compton --config ~/.config/i3/compton.conf
+#exec i3-msg 'workspace $ws4; exec -no-startup-id signal-desktop'
+exec compton --config $conf_dir/compton.conf
