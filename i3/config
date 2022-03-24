@@ -11,7 +11,6 @@
 
 set $mod Mod4
 set $conf_dir ~/.config/i3
-set $i3sys ~/.config/i3/i3system.sh
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -183,9 +182,14 @@ bar {
 ## Added for sound control
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+## Media volume controls
+bindsym XF86AudioMute exec amixer sset 'Master' toggle
+bindsym XF86AudioLowerVolume exec amixer sset 'Master' 5%-
+bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
 
 # Media player controls
 # Playerctl was manually installed from github.
@@ -200,12 +204,15 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 
-
-set $mode_system System (l) lock, (x) exit, (r) reboot, (s) shutdown
+# System commands
+set $i3sys ~/.config/i3/i3system.sh
+set $mode_system System (l)ock, e(x)it, (h)ibernate, sus(p)end (r)eboot, (s)hutdown
 
 mode "$mode_system" {
     bindsym l exec --no-startup-id $i3sys lock, mode "default"
     bindsym x exec --no-startup-id $i3sys exit, mode "default"
+    bindsym h exec --no-startup-id $i3sys hibernate, mode "default"
+    bindsym p exec --no-startup-id $i3sys suspend, mode "default"
     bindsym r exec --no-startup-id $i3sys reboot, mode "default"
     bindsym s exec --no-startup-id $i3sys shutdown, mode "default"
 
@@ -216,9 +223,9 @@ mode "$mode_system" {
 
 bindsym $mod+semicolon mode "$mode_system"
 
-
 # Startup the applications when logging in.
 exec variety
+exec $conf_dir/i3displays.sh
 exec i3-msg 'workspace $ws2; exec i3-sensible-terminal'
 exec i3-msg 'workspace $ws2; exec google-chrome --profile-directory=Default'
 #exec i3-msg 'workspace $ws4; exec -no-startup-id signal-desktop'
