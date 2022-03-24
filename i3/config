@@ -187,7 +187,7 @@ bar {
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 ## Media volume controls
-bindsym XF86AudioMute exec amixer sset 'Master' toggle
+bindsym XF86AudioMute exec $conf_dir/i3mutetoggle.sh
 bindsym XF86AudioLowerVolume exec amixer sset 'Master' 5%-
 bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
 
