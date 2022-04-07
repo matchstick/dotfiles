@@ -201,7 +201,8 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-bindsym $mod+z exec env XDG_CURRENT_DESKTOP=GNOME gnome-control-center
+bindsym $mod+m exec /opt/google/chrome/google-chrome \
+	--profile-directory=Default --app-id=cinhimbnkkaeohfgghhklpknlkffjgod
 
 # System commands
 set $i3sys ~/.config/i3/i3system.sh
