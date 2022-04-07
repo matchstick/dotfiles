@@ -3,18 +3,18 @@
 # Test to see if the laptop is connected to an external display. 
 # If so we want the external to be primary and on the left. 
 
-NUMDISPLAYS=`xrandr  | grep connected | grep -v disconnected | wc -l`
+NUMDISPLAYS=`xrandr  | grep " connected " | wc -l`
 
 if [ $NUMDISPLAYS = "2" ]
 then
 	xrandr \
-	--output DP-1 --primary --mode 3840x2160 --pos 0x0 --rotate normal \
-	--output eDP-1 --mode 2880x1620 --pos 3840x0 --rotate normal \
-	--output DP-2 --off
+	--output DP1 --primary --mode 3840x2160 --pos 0x0 --rotate normal \
+	--output eDP1 --mode 2880x1620 --pos 3840x0 --rotate normal \
+	--output DP2 --off
 else
 	xrandr \
-	--output eDP-1 --primary --mode 2880x1620 --pos 0x0 --rotate normal \
-	--output DP-1 --off
-	--output DP-2 --off
+	--output eDP1 --primary --mode 2880x1620 --pos 0x0 --rotate normal \
+	--output DP1 --off
+	--output DP2 --off
 fi
 
