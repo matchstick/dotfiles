@@ -7,6 +7,10 @@ lock() {
 	$I3_BIN/i3lock.sh $LOCK_PICS
 }
 
+# Dbus Send is used for ubuntu. For ArchLinux we have other techniques.
+# TODO make this script portable for both distros.
+# For now just remembering that the arg can be:
+# "Suspend", "Reboot", "Hibernate"
 dbus_send() {
 	local cmd=$1
 	dbus-send --system --print-reply \
@@ -22,13 +26,13 @@ case "$1" in
 		i3-msg exit
 	;;
 	suspend)
-		lock && dbus_send "Suspend"
+		lock && systemctl suspend
 	;;
 	hibernate)
 		dbus_send "Hibernate"
 	;;
 	reboot)
-		dbus_send "Reboot"
+		reboot
 	;;
 	shutdown)
 		systemctl poweroff
