@@ -211,6 +211,7 @@ set $mode_system System (l)ock, e(x)it, (h)ibernate, sus(p)end (r)eboot, (s)hutd
 
 mode "$mode_system" {
     bindsym l exec --no-startup-id $i3sys lock, mode "default"
+    bindsym e exec --no-startup-id $i3sys exit, mode "default"
     bindsym x exec --no-startup-id $i3sys exit, mode "default"
     bindsym h exec --no-startup-id $i3sys hibernate, mode "default"
     bindsym p exec --no-startup-id $i3sys suspend, mode "default"
@@ -231,15 +232,11 @@ gaps outer 15
 gaps top 15
 gaps bottom 15
 
-# For thebackground wallpaper, don't forget to install feh also.
-exec variety
-
 # To arrange displays for either laptop only or external also.
-exec $conf_dir/i3displays.sh
+#exec $conf_dir/i3displays.sh
 
 exec i3-msg 'workspace $ws1; exec i3-sensible-terminal'
-exec i3-msg 'workspace $ws2; exec i3-sensible-terminal'
-exec i3-msg 'workspace $ws2; exec google-chrome-stable --profile-directory=Default'
+exec i3-msg 'workspace $ws1; exec google-chrome-stable --profile-directory=Default'
 
 # Transparencies for terminals.
 exec picom --config $conf_dir/compton.conf
@@ -251,3 +248,6 @@ exec --no-startup-id dex --autostart --environment i3
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+
+# For thebackground wallpaper, don't forget to install feh also.
+exec --no-startup-id variety
