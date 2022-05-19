@@ -12,6 +12,10 @@ alias more='less'
 alias rmba='rm -f *~'
 alias vi='vim -X'
 
+alias k='kubectl'
+
+alias lockheed='sudo mount -t cifs -o username=mhr //lockheed.neverthere.org/mhr /mnt/lockheed'
+
 alias bashrc='source ~/.bashrc'
 alias dos2unix='perl -pi -e "tr/\r//d"'
 alias unix2dos='perl -pi -e "s/\n$/\r\n/g"'
@@ -33,6 +37,7 @@ alias allfiles='find . -type f'
 alias pyfiles='find . -name "*.py"'
 alias javafiles='find . -name "*.java"'
 
+alias pacman='sudo pacman'
 
 function count {
   I=$1
