@@ -201,8 +201,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-bindsym $mod+m exec /opt/google/chrome/google-chrome --disable-gpu \
-	--profile-directory=Default --app-id=cinhimbnkkaeohfgghhklpknlkffjgod
+bindsym $mod+m exec $conf_dir/i3chrome.sh --app-id=cinhimbnkkaeohfgghhklpknlkffjgod
 
 # System commands
 set $i3sys ~/.config/i3/i3system.sh
@@ -236,10 +235,13 @@ gaps bottom 15
 #exec $conf_dir/i3displays.sh
 
 exec i3-msg 'workspace $ws1; exec i3-sensible-terminal'
-exec i3-msg 'workspace $ws1; exec google-chrome-stable --disable-gpu --profile-directory=Default'
+exec i3-msg 'workspace $ws1; exec $conf_dir/i3chrome.sh'
 
 # Transparencies for terminals.
 exec picom --config $conf_dir/compton.conf
+
+# Screen Capture
+exec --no-startup-id flameshot
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -251,3 +253,5 @@ exec --no-startup-id nm-applet
 
 # For thebackground wallpaper, don't forget to install feh also.
 exec --no-startup-id variety
+
+exec --no-startup-id xscreensaver --no-splash
