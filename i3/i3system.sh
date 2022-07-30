@@ -29,7 +29,7 @@ case "$1" in
 		lock && systemctl suspend
 	;;
 	hibernate)
-		dbus_send "Hibernate"
+		systemctl hibernate
 	;;
 	reboot)
 		reboot
