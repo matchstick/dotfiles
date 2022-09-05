@@ -14,7 +14,9 @@ alias vi='vim -X'
 
 alias k='kubectl'
 
-alias lockheed='sudo mount -t cifs -o username=mhr //lockheed.neverthere.org/mhr /mnt/lockheed'
+lockheed() {
+    sudo mount -t cifs -o username=mhr //lockheed.neverthere.org/$1 /mnt/lockheed/$1
+}
 
 alias bashrc='source ~/.bashrc'
 alias dos2unix='perl -pi -e "tr/\r//d"'
