@@ -15,4 +15,7 @@ alias rmba='rm -f *~'
 alias vi='vim -X'
 alias k='kubectl'
 
-
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m'
+fi
