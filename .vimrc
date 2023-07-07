@@ -31,6 +31,7 @@ set rtp+=/opt/homebrew/opt/fzf
 call plug#begin()
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 nnoremap <silent> <C-p> :Files<CR>
@@ -43,8 +44,8 @@ nnoremap <C-f> :Rg!
 " [s - last mispelled word
 " z= - see suggestions
 " zg - accept word
-nnoremap <C-q> :setlocal spell spelllang=en_us
-nnoremap <C-w> :set nospell
+""nnoremap <C-q> :setlocal spell spelllang=en_us
+""nnoremap <C-m> :set nospell
 nnoremap <C-t> !}fold -s
 
 " Replacing grep with ripgrep
