@@ -3,6 +3,7 @@ PATH="~/go/bin:$PATH"
 
 export EDITOR="vim"
 export CLICOLOR=1
+export LSCOLORS=GxExBxDxBxEgEdxbxgxcxd
 
 alias ls='ls -G'
 alias ll='ls -lG'
