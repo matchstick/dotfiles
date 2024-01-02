@@ -14,10 +14,6 @@ alias vi='vim -X'
 
 alias k='kubectl'
 
-lockheed() {
-    sudo mount -t cifs -o username=mhr //lockheed.neverthere.org/$1 /mnt/lockheed/$1
-}
-
 alias bashrc='source ~/.bashrc'
 alias dos2unix='perl -pi -e "tr/\r//d"'
 alias unix2dos='perl -pi -e "s/\n$/\r\n/g"'
@@ -39,7 +35,11 @@ alias allfiles='find . -type f'
 alias pyfiles='find . -name "*.py"'
 alias javafiles='find . -name "*.java"'
 
+# archlinux
 alias pacman='sudo pacman'
+alias pacman_key_sync='pacman -Sy archlinux-keyring && pacman -Su'
+alias pacman_key_reset='pacman-key --init && pacman-key --populate'
+
 
 function count {
   I=$1
