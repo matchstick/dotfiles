@@ -232,7 +232,7 @@ gaps top 15
 gaps bottom 15
 
 # To arrange displays for either laptop only or external also.
-#exec $conf_dir/i3displays.sh
+exec $conf_dir/i3displays.sh
 
 exec i3-msg 'workspace $ws1; exec i3-sensible-terminal'
 exec i3-msg 'workspace $ws1; exec $conf_dir/i3chrome.sh'
@@ -253,5 +253,7 @@ exec --no-startup-id nm-applet
 
 # For thebackground wallpaper, don't forget to install feh also.
 exec --no-startup-id variety
+
+exec --no-startup-id xbacklight -set 100
 
 exec --no-startup-id xscreensaver --no-splash

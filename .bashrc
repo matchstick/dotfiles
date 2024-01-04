@@ -116,7 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-PATH=$PATH:/usr/local/go/bin:~/go/bin:$HOME/.config/i3
+PATH=$PATH:/home/mhr/bin:/usr/local/go/bin:~/go/bin:$HOME/.config/i3
 export PATH
 EDITOR=vi
 export EDITOR
