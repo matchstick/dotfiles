@@ -1,5 +1,4 @@
-PATH="/opt/homebrew/bin:$PATH"
-PATH="~/go/bin:$PATH"
+export PATH=/opt/homebrew/bin:~/go/bin:~/bin:$PATH
 
 export EDITOR="vim"
 export CLICOLOR=1
@@ -20,3 +19,4 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
   export FZF_DEFAULT_OPTS='-m'
 fi
+#export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
