@@ -38,8 +38,9 @@ alias javafiles='find . -name "*.java"'
 # archlinux
 alias pacman='sudo pacman'
 alias pacman_key_sync='pacman -Sy archlinux-keyring && pacman -Su'
-alias pacman_key_reset='pacman-key --init && pacman-key --populate'
+alias pacman_key_reset='sudo pacman-key --init && sudo pacman-key --populate'
 
+alias pacman_all='pacman_key_reset ; pacman_key_sync; pacman -Syu'
 
 function count {
   I=$1
