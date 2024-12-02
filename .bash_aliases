@@ -12,6 +12,8 @@ alias more='less'
 alias rmba='rm -f *~'
 alias vi='vim -X'
 
+alias egrep='egrep -E'
+
 alias k='kubectl'
 
 alias bashrc='source ~/.bashrc'
@@ -41,6 +43,8 @@ alias pacman_key_sync='pacman -Sy archlinux-keyring && pacman -Su'
 alias pacman_key_reset='sudo pacman-key --init && sudo pacman-key --populate'
 
 alias pacman_all='pacman_key_reset ; pacman_key_sync; pacman -Syu'
+
+alias plex_check='docker exec plex ls /data'
 
 function count {
   I=$1
@@ -76,3 +80,5 @@ export GOPATH=~/src/go
 function KUBEGOPATH {
   export GOPATH=`pwd`/Godeps/_workspace:`pwd`/_output/local/go:$GOPATH
 }
+
+alias acme_log='journalctl -u acme_letsencrypt'
