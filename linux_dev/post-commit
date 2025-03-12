@@ -1,0 +1,3 @@
+#!/bin/sh
+# This should go in .git/hooks/post-commit
+exec git show --format=email HEAD | ./scripts/checkpatch.pl --strict --codespell
