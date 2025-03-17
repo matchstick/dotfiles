@@ -82,3 +82,11 @@ function KUBEGOPATH {
 }
 
 alias acme_log='journalctl -u acme_letsencrypt'
+
+check_patch() {
+	perl scripts/checkpatch.pl --strict -f $1
+}
+
+mail_greg() {
+	git send-email --to=gregkh@linuxfoundation.org $1
+}
