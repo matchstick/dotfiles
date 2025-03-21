@@ -1,0 +1,41 @@
+# .muttrc
+# ================  IMAP  ====================
+set imap_user = 'matchstick@neverthere.org'
+set imap_pass = 'PASSWORD'
+set spoolfile = "+INBOX"
+set folder = imaps://imap.gmail.com/
+set record="+[Gmail]/Sent Mail"
+set postponed="+[Gmail]/Drafts"
+set trash = "+[Gmail]/Trash"
+
+# ================  SMTP  ====================
+set smtp_url = "smtp://matchstick@neverthere.org@smtp.gmail.com:587/"
+set smtp_pass = $imap_pass
+set ssl_force_tls = yes # Require encrypted connection
+
+# ================  Composition  ====================
+set editor = `echo \$EDITOR`
+set edit_headers = yes  # See the headers when editing
+set charset = UTF-8     # value of $LANG; also fallback for send_charset
+# Sender, email address, and sign-off line must match
+unset use_domain        # because joe@localhost is just embarrassing
+set realname = "Michael Rubin"
+set from = "matchstick@neverthere.org"
+set use_from = yes
+
+# Misc
+set ssl_force_tls = yes
+set ssl_starttls = yes
+
+# Header cache for speed (optional)
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+
+# Charset and editor
+set charset = utf-8
+set edit_headers = yes
+set editor = vim
+
+set sendmail="/usr/bin/esmtp"
+set envelope_from=yes

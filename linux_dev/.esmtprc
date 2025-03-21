@@ -1,0 +1,6 @@
+identity "matchstick@neverthere.org"
+hostname smtp.gmail.com:587
+username "matchstick@neverthere.org"
+password "PASSWORD"
+starttls required
+default
