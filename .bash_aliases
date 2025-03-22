@@ -84,9 +84,14 @@ function KUBEGOPATH {
 alias acme_log='journalctl -u acme_letsencrypt'
 
 check_patch() {
-	find $1 -type f -name *.[c\|h] | grep -v mod | \
+	find $1 -type f -name *.[c\|h] | grep -v mod | sort | \
 		xargs perl scripts/checkpatch.pl --strict -f
 }
+
+find_linux_src() {
+	find $1 -type f -name *.[c\|h] | grep -v mod | sort
+}
+
 
 mail_greg() {
 	git send-email --to=gregkh@linuxfoundation.org $1
