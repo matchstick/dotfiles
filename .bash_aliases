@@ -84,7 +84,8 @@ function KUBEGOPATH {
 alias acme_log='journalctl -u acme_letsencrypt'
 
 check_patch() {
-	perl scripts/checkpatch.pl --strict -f $1
+	find $1 -type f -name *.[c\|h] | grep -v mod | \
+		xargs perl scripts/checkpatch.pl --strict -f
 }
 
 mail_greg() {
